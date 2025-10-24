@@ -26,4 +26,14 @@ contract ToDo {
     // (otherwise modifier taskExists will not work)
     uint256 private lastTaskId = 1;
     uint256[] private taskIds;
+
+    function createTask(string memory _content) public {
+        uint256 theNow = block.timestamp;
+
+        tasks[lastTaskId] = Task(lastTaskId, theNow, _content, false, 0);
+        taskIds.push(lastTaskId);
+
+        emit TaskCreated(lastTaskId, theNow, _content, false);
+        lastTaskId++;
+    }
 }
