@@ -36,4 +36,23 @@ contract ToDo {
         emit TaskCreated(lastTaskId, theNow, _content, false);
         lastTaskId++;
     }
+
+    function getTask(
+        uint256 id
+    )
+        public
+        view
+        taskExists(id)
+        returns (uint256, uint256, string memory, bool, uint256)
+    {
+        return (
+            id,
+            tasks[id].date,
+            tasks[id].content,
+            tasks[id].done,
+            tasks[id].dateComplete
+        );
+    }
+
+    // return dummy data for test
 }
